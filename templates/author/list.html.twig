@@ -1,0 +1,21 @@
+<table>
+{% if (Auth is empty) or (Auth is not defined) %}
+    <p>pas d'element</p>
+{% else %}
+    {% set total_books=0 %}
+    {% set total_Authors=0 %}
+    <tr>
+        <td>Username</td>
+    </tr>
+    {% for element in Auth%}
+    {% set total_books = total_books + element.nb_books %}
+    {% set total_Authors = total_Authors + 1 %}
+    <tr>
+        <td>{{element.username|upper}}</td>
+        <td><a href="{{path('app_authdetails',{'id':element.id})}}">Details</td>
+    </tr>
+    {%endfor%}
+{%endif%}
+</table>
+<p>Nombre Des Auteurs : {{total_Authors}}</p>
+<p>Nombre Totale de livres : {{total_books}}</p>
